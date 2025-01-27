@@ -65,3 +65,10 @@ a {
     text-decoration: underline;
   }
 }
+
+li img {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}

@@ -3,6 +3,8 @@ import * as fs from 'fs';
 interface Book {
   title: string;
   date: Date;
+  hasImage(): boolean;
+  getImagePath(): string;
 }
 
 interface BooksByDate {
@@ -10,6 +12,22 @@ interface BooksByDate {
 }
 
 const BOOK_ENTRY_LINE_COUNT = 2; // 책 한 권당 필요한 줄 수 (제목 + 날짜)
+
+class BookImpl implements Book {
+  constructor(
+    public title: string,
+    public date: Date
+  ) {}
+
+  hasImage(): boolean {
+    return fs.existsSync(this.getImagePath());
+  }
+
+  getImagePath(): string {
+    const fileName = `${this.title.replace(/\s+/g, '_')}.jpg`;
+    return `images/${fileName}`;
+  }
+}
 
 function parseBookList(input: string): Book[] {
   const lines = input.trim().split('\n');
@@ -19,10 +37,7 @@ function parseBookList(input: string): Book[] {
     if (lines[i] && lines[i + 1]) {
       const title = lines[i];
       const date = lines[i + 1];
-      books.push({
-        title,
-        date: new Date(date)
-      });
+      books.push(new BookImpl(title, new Date(date)));
     }
   }
   
@@ -49,7 +64,11 @@ function generateBookList(books: Book[]): string {
     .forEach(date => {
       bookList += `\n        <h3>${date}</h3>\n        <ul>`;
       booksByDate[date].forEach(book => {
-        bookList += `\n          <li>${book.title}</li>`;
+        bookList += '\n          <li>';
+        if (book.hasImage()) {
+          bookList += `<img src="${book.getImagePath()}" alt="${book.title}" /><br/>`;
+        }
+        bookList += `${book.title}</li>`;
       });
       bookList += '\n        </ul>';
     });
