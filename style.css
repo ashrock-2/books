@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  font-family: "MesloLGLDZ Nerd Font Mono", monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1em 0;
+  word-break: keep-all;
+}
+
+p {
+  word-break: keep-all;
+}
+
+li {
+  word-wrap: break-word;
+}
+
+code {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: hsl(240, 42%, 12%);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+@font-face {
+  font-family: "MesloLGLDZ Nerd Font Mono";
+  src: local("MesloLGLDZ Nerd Font Mono"),
+    url("fonts/MesloLGLDZNerdFontMono-Regular.ttf") format("truetype");
+  font-display: block;
+}
+
+body {
+  background: hsl(240, 20%, 6%);
+  color: hsl(240, 42%, 82%);
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+main {
+  width: 100%;
+  max-width: 47.5rem;
+  justify-self: center;
+  padding-bottom: 24px;
+}
+
+a {
+  color: hsl(240, 82%, 82%);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
